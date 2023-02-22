@@ -1,16 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { featchPokemon } from 'redux/pokemon/pokemon.operation';
+import { selectPoremon } from 'redux/pokemon/pokemon.selector';
+
 export const App = () => {
+  const pokemons = useSelector(selectPoremon);
+  console.log('pokemons:', pokemons);
+  const dispatch = useDispatch();
+  const handleFeatchPokemon = () => {
+    dispatch(featchPokemon());
+  };
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <button type="button" onClick={handleFeatchPokemon}>
+        click
+      </button>
+      {pokemons && (
+        <ul>
+          {pokemons.map(({ name }) => {
+            return (
+              <li key={name}>
+                <b>{name}</b>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };
