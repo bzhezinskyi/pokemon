@@ -1,30 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { featchPokemon } from 'redux/pokemon/pokemon.operation';
-import { selectPoremon } from 'redux/pokemon/pokemon.selector';
+import HomePage from 'page/HomePage';
+import PokemonListPage from 'page/PokemonListPage';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './Layout';
 
 export const App = () => {
-  const pokemons = useSelector(selectPoremon);
-  console.log('pokemons:', pokemons);
-  const dispatch = useDispatch();
-  const handleFeatchPokemon = () => {
-    dispatch(featchPokemon());
-  };
   return (
-    <div>
-      <button type="button" onClick={handleFeatchPokemon}>
-        click
-      </button>
-      {pokemons && (
-        <ul>
-          {pokemons.map(({ name }) => {
-            return (
-              <li key={name}>
-                <b>{name}</b>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/pokemon" element={<PokemonListPage />} />
+      </Route>
+    </Routes>
   );
 };
