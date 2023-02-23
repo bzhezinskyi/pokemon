@@ -5,7 +5,7 @@ const { createSlice, isAnyOf } = require('@reduxjs/toolkit');
 const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: {
-    data: {},
+    data: { results: [] },
     isLoading: false,
     error: null,
     isPokemonDetails: false,
